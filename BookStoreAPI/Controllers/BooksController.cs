@@ -108,5 +108,22 @@ namespace BookStoreAPI.Controllers
 
             return NoContent();
         }
+        
+        
+        /// <summary>
+        /// Retrieves the non-duplicated list of authors.
+        /// </summary>
+        /// <returns>A list of distinct authors.</returns>
+        [HttpGet("authors")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<string>>> GetDistinctAuthors()
+        {
+            var books = await _dataService.GetBooks();
+            var distinctAuthors = _dataService.GetDistinctAuthors(books);
+            return distinctAuthors;
+        }
+
+
+        /// <summary>
     }
 }
