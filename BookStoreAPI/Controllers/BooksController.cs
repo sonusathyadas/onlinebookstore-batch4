@@ -123,7 +123,20 @@ namespace BookStoreAPI.Controllers
             return distinctAuthors;
         }
 
-
         /// <summary>
+        /// Retrieves the list of book titles.
+        /// </summary>
+        /// <returns>A list of book titles.</returns>
+        [HttpGet("titles")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<List<string>>> GetBookTitles()
+        {
+            var books = await _dataService.GetBooks();
+            var titles = books.Select(book => book.Title).ToList();
+            return titles;
+        }
+
+
+        
     }
 }
